@@ -1,9 +1,11 @@
-﻿using System;
+﻿
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Net;
 using System.Net.Sockets;
+
 
 namespace RdR
 {
@@ -124,12 +126,93 @@ namespace RdR
             if ( RdR.Util.IsEmpty(iWhat) )
                 return iDefault;
 
-            decimal xNum;
+            var fixMe = iWhat.ToString();
+            var outtie = string.Empty;
 
-            if ( !decimal.TryParse(iWhat.ToString(), out xNum) )
+            foreach ( char checkMe in fixMe.ToCharArray() )
+            {
+                if ( char.IsNumber(checkMe) || checkMe == '.' || checkMe == '-' )
+                {
+                    outtie += checkMe.ToString();
+                }
+            }
+
+            if ( Util.IsEmpty(outtie) )
+            {
                 return iDefault;
+            }
 
-            return xNum;
+            return Convert.ToDecimal(outtie);
+        }
+#endregion
+
+
+#region -----  GetNumber(+1) -----
+        /// <summary>
+        /// Converts Object to number.  0 is returned if IsEmpty()
+        /// </summary>
+        /// <param name="iWhat">Any object string, number, or otherwise</param>
+        /// <returns>Integer value of object or 0 if object is empty</returns>
+        public static Int32 GetInt(object iWhat)
+        {
+            return RdR.Util.GetInt(iWhat, 0);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="iWhat">Any object string, number, or otherwise</param>
+        /// <param name="iDefault">Default value to return if IsEmpty</param>
+        /// <returns>Integer value of object or default if passed and object is empty</returns>
+        public static Int32 GetInt(object iWhat, Int32 iDefault)
+        {
+            if ( RdR.Util.IsEmpty(iWhat) )
+            {
+                return iDefault;
+            }
+
+            var fixMe = iWhat.ToString();
+            var outtie = string.Empty;
+
+            foreach ( char checkMe in fixMe.ToCharArray() )
+            {
+                if ( char.IsNumber(checkMe) || checkMe == '-' )
+                {
+                    outtie += checkMe.ToString();
+                }
+            }
+
+            if ( Util.IsEmpty(outtie) )
+            {
+                return iDefault;
+            }
+
+            return Convert.ToInt32(outtie);
+        }
+#endregion
+
+        
+#region -----  GetDate  -----
+        public static DateTime GetDate(object wannabeDate)
+        {
+            return Util.GetDate(wannabeDate, null);
+        }
+
+        public static DateTime GetDate(object wannabeDate, DateTime? iDefault)
+        {
+            if ( Util.IsEmpty(wannabeDate) )
+            {
+                return iDefault.Value;
+            }
+
+            DateTime dude;
+
+            if ( DateTime.TryParse(wannabeDate.ToString(), out dude) )
+            {
+                return dude;
+            }
+
+            return iDefault.Value;
         }
 #endregion
 
@@ -178,7 +261,7 @@ namespace RdR
 
             return false;
         }
-        #endregion
+#endregion
 
         public static bool IsEqual(object iWhat1, object iWhat2)
         {
@@ -200,7 +283,7 @@ namespace RdR
 
             foreach ( char sPiece in wannabeNumber.ToString() )
             {
-                if ( !char.IsNumber(sPiece) )
+                if ( !char.IsNumber(sPiece) && sPiece != '.' && sPiece != '-' )
                 {
                     return false;
                 }

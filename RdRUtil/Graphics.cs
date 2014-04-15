@@ -10,21 +10,14 @@ namespace RdR
     {
         public static Color GetColor(string wannabeColor, Color defaultColor)
         {
-            if ( Util.IsEmpty(wannabeColor) )
+            var newColor = Graphics.HexToColor(wannabeColor);
+
+            if ( newColor == Color.Empty )
             {
                 return defaultColor;
             }
 
-            try
-            {
-                var convColor = Int32.Parse(wannabeColor.Replace("#", ""), NumberStyles.HexNumber);
-
-                return Color.FromArgb(convColor);
-            }
-            catch
-            {
-                return defaultColor;
-            }
+            return newColor;
         }
 
         public static Color HexToColor(object wannabeColor)

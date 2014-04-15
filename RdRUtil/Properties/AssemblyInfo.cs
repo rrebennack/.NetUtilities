@@ -32,8 +32,8 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.2.0.1")]
-[assembly: AssemblyFileVersion("1.2.0.1")]
+[assembly: AssemblyVersion("1.3.0.1")]
+[assembly: AssemblyFileVersion("1.3.0.1")]
 
 /*
  * 06/25/2012 - 1.0.0.0     - Started this cat
@@ -41,4 +41,7 @@ using System.Runtime.InteropServices;
  * 11/20/2013 - 1.1.0.1     - Chg: Util.IsEmpty: Check for a blank date ("0000-00-00 00:00:00")
  * 12/04/2013 - 1.2.0.0     - Add: 'Util.MyIP()'
  * 12/06/2013 - 1.2.0.1     - Add: 'Util.MyIP()': Added an overload to specify IPV4 vs. IPV6
+ * 04/11/2014 - 1.3.0.0     - Add: 'Util.GetInt()' & 'Util.GetDate()'
+ *                          - Fix: 'Util.IsNumber()' & 'Util.GetNumber()': Check each charater rather than TryParse.  Allow '-' & '.'
+ * 04/15/2014 - 1.3.0.1     - Fix: 'Graphics.GetColor()': Didn't get the alpha channle.  It now calls 'Graphics.HexToColor()'
 */
