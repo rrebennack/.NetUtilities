@@ -252,12 +252,16 @@ namespace RdR
             decimal xDude;
 
             if ( decimal.TryParse(iWhat.ToString(), out xDude) )
+            {
                 return (xDude == 0);
+            }
 
             bool xLogi;
 
             if ( bool.TryParse(iWhat.ToString(), out xLogi) && !xLogi )
+            {
                 return true;
+            }
 
             return false;
         }

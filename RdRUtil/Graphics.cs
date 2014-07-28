@@ -8,7 +8,7 @@ namespace RdR
 {
     public static class Graphics
     {
-        public static Color GetColor(string wannabeColor, Color defaultColor)
+        public static Color GetColor(object wannabeColor, Color defaultColor)
         {
             var newColor = Graphics.HexToColor(wannabeColor);
 
