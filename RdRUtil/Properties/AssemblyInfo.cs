@@ -32,8 +32,8 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.4.0.1")]
-[assembly: AssemblyFileVersion("1.4.0.1")]
+[assembly: AssemblyVersion("1.5.0.0")]
+[assembly: AssemblyFileVersion("1.5.0.0")]
 
 /*
  * 06/25/2012 - 1.0.0.0     - Started this cat
@@ -46,4 +46,5 @@ using System.Runtime.InteropServices;
  * 04/15/2014 - 1.3.0.1     - Fix: 'Graphics.GetColor()': Didn't get the alpha channle.  It now calls 'Graphics.HexToColor()'
  * 07/14/2014 - 1.4.0.0     - Add: 'Util.GetBytes()'
  * 07/24/2014 - 1.4.0.1     - Chg: 'Util.IsEmpty()': Check for a string = "null"
+ * 09/15/2014 - 1.5.0.0     - Add: 'Util.GetEnumValues()'
 */

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Net;
 using System.Net.Sockets;
+using System.Drawing;
 
 
 namespace RdR
@@ -244,6 +245,11 @@ namespace RdR
                 return true;
             }
 
+            if ( iWhat is Color )
+            {
+                return ((Color)iWhat == Color.Empty);
+            }
+
             if ( iWhat.ToString() == "0000-00-00 00:00:00" )
             {
                 return true;
@@ -335,6 +341,11 @@ namespace RdR
             double num = Math.Round(bytes / Math.Pow(1024, place), 1);
 
             return (Math.Sign(byteCount) * num).ToString() + suffy[place];
+        }
+
+        public static IEnumerable<string> GetEnumValues<T>()
+        {
+            return Enum.GetNames(typeof(T));
         }
     }
 }
