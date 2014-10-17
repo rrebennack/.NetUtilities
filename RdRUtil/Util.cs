@@ -250,7 +250,7 @@ namespace RdR
                 return ((Color)iWhat == Color.Empty);
             }
 
-            if ( iWhat.ToString() == "0000-00-00 00:00:00" )
+            if ( iWhat.ToString() == "0000-00-00" || iWhat.ToString() == "0000-00-00 00:00:00" )
             {
                 return true;
             }
