@@ -3,6 +3,8 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 
 namespace RdR
 {
@@ -71,6 +73,32 @@ namespace RdR
             g.DrawImage(sourceImage, new Rectangle(0, 0, outImage.Width, outImage.Height), 0, 0, outImage.Width, outImage.Height, GraphicsUnit.Pixel, imgAttr);
 
             return outImage;
+        }
+
+        public static Bitmap RotateImage(Bitmap rotateMe, float angle)
+        {
+            float rad = (float)(angle / 180.0 * Math.PI);
+            double fW = Math.Abs((Math.Cos(rad) * rotateMe.Width)) + Math.Abs((Math.Sin(rad) * rotateMe.Height));
+            double fH = Math.Abs((Math.Sin(rad) * rotateMe.Width)) + Math.Abs((Math.Cos(rad) * rotateMe.Height));
+
+            var bpOut = new Bitmap((int)Math.Ceiling(fW), (int)Math.Ceiling(fH));
+            var gsTemp = System.Drawing.Graphics.FromImage(bpOut);
+            var mxTranny = gsTemp.Transform;
+
+            gsTemp.SmoothingMode = SmoothingMode.HighQuality;
+            gsTemp.PixelOffsetMode = PixelOffsetMode.HighQuality;
+            gsTemp.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            gsTemp.TextRenderingHint = TextRenderingHint.AntiAlias;
+            gsTemp.CompositingQuality = CompositingQuality.HighQuality;
+
+            //here we do not need to translate, we rotate at the specified point
+            mxTranny.RotateAt(angle, new PointF((float)(bpOut.Width / 2), (float)(bpOut.Height / 2)), MatrixOrder.Append);
+
+            gsTemp.Transform = mxTranny;
+            gsTemp.DrawImage(rotateMe, new PointF((float)((bpOut.Width - rotateMe.Width) / 2), (float)((bpOut.Height - rotateMe.Height) / 2)));
+            gsTemp.Dispose();
+
+            return bpOut;
         }
     }
 }
