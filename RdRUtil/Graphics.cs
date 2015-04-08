@@ -1,10 +1,10 @@
 ﻿
 using System;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.Globalization;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Drawing.Text;
+using System.Globalization;
 
 namespace RdR
 {
@@ -99,6 +99,43 @@ namespace RdR
             gsTemp.Dispose();
 
             return bpOut;
+        }
+
+        public static Image ResizeImage(Image sourceImage, Size size)
+        {
+            return Graphics.ResizeImage(sourceImage, size.Width, size.Height);
+        }
+
+        public static Image ResizeImage(Image sourceImage, int width, int height)
+        {
+            var orgW = sourceImage.Width;
+            var orgH = sourceImage.Height;
+
+            var xPerW = ((float)width / (float)orgW);
+            var xPerH = ((float)height / (float)orgH);
+            float xPer = 0;
+
+            if ( xPerH < xPerW )
+            {
+                xPer = xPerH;
+            }
+            else
+            {
+                xPer = xPerW;
+            }
+
+            var newW = (int)(orgW * xPer);
+            var newH = (int)(orgH * xPer);
+            var outImg = new Bitmap(newW, newH);
+
+            var gsTmp = System.Drawing.Graphics.FromImage((Image)outImg);
+
+            gsTmp.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+            gsTmp.DrawImage(sourceImage, 0, 0, newW, newH);
+            gsTmp.Dispose();
+
+            return (Image)outImg;
         }
     }
 }
