@@ -32,8 +32,8 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.7.0.0")]
-[assembly: AssemblyFileVersion("1.7.0.0")]
+[assembly: AssemblyVersion("1.8.0.0")]
+[assembly: AssemblyFileVersion("1.8.0.0")]
 
 /*
  * 06/25/2012 - 1.0.0.0     - Started this cat
@@ -50,4 +50,6 @@ using System.Runtime.InteropServices;
  * 03/25/2015 - 1.6.0.0     - Add: 'Graphics.RotateImage()'
  * 03/26/2015 - 1.6.0.1     - Fix: 'Graphics.RotateImage()': Use high quality image
  * 04/08/2015 - 1.7.0.0     - Add: 'Graphics.ResizeImage()'
+ * 04/16/2015 - 1.7.0.1     - Fix: 'Util.GetInt()': If the value passed has a decimal, round the integer, don't just drop the decimal.
+ * 08/17/2015 - 1.8.0.0     - Add: 'Graphics.SetImageOpacity()'
 */

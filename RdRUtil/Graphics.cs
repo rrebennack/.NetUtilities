@@ -137,5 +137,31 @@ namespace RdR
 
             return (Image)outImg;
         }
+
+        public static Image SetImageOpacity(Image image, float opacity)
+        {
+            try
+            {
+                var bmp = new Bitmap(image.Width, image.Height);
+
+                using ( System.Drawing.Graphics gfx = System.Drawing.Graphics.FromImage(bmp) )
+                {
+                    var matrix = new ColorMatrix();
+                    var attributes = new ImageAttributes();
+
+                    matrix.Matrix33 = opacity;
+
+                    attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+
+                    gfx.DrawImage(image, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, attributes);
+                }
+
+                return bmp;
+            }
+            catch ( Exception ex )
+            {
+                return null;
+            }
+        }
     }
 }

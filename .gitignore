@@ -1,4 +1,3 @@
-RdRUtil/obj
-
-RdRUtil/bin
-RdRUtil.suo
+/RdRUtil/obj
+/RdRUtil/bin
+/*.suo

@@ -105,7 +105,7 @@ namespace RdR
         #endregion
 
 
-#region -----  GetNumber(+1) -----
+#region -----  GetNumber() -----
         /// <summary>
         /// Converts Object to number.  0 is returned if IsEmpty()
         /// </summary>
@@ -148,7 +148,7 @@ namespace RdR
 #endregion
 
 
-#region -----  GetNumber(+1) -----
+#region -----  GetInt() -----
         /// <summary>
         /// Converts Object to number.  0 is returned if IsEmpty()
         /// </summary>
@@ -177,7 +177,7 @@ namespace RdR
 
             foreach ( char checkMe in fixMe.ToCharArray() )
             {
-                if ( char.IsNumber(checkMe) || checkMe == '-' )
+                if ( char.IsNumber(checkMe) || checkMe == '-' || checkMe == '.' )
                 {
                     outtie += checkMe.ToString();
                 }
@@ -186,6 +186,13 @@ namespace RdR
             if ( Util.IsEmpty(outtie) )
             {
                 return iDefault;
+            }
+
+            if ( outtie.Contains(".") )
+            {
+                var tmpO = Convert.ToDecimal(outtie);
+
+                return (int)Math.Round(tmpO);
             }
 
             return Convert.ToInt32(outtie);
